@@ -115,7 +115,7 @@ public class DELETE_UPDATE {
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("\n📊 INQUIRY 3: Professional with highest equipment variety last month");
+            System.out.println("\n Professional with highest equipment variety last month");
             System.out.println("─────────────────────────────────────────────────────────────");
             System.out.printf("%-5s %-25s %-20s %-10s%n",
                     "ID", "Full Name", "Role", "Unique Equipment");
@@ -147,7 +147,7 @@ public class DELETE_UPDATE {
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-            System.out.println("\n📊 INQUIRY 4: Studios with NO sessions last month");
+            System.out.println("\n Studios with NO sessions last month");
             System.out.println("───────────────────────────────────────────────────────");
             System.out.printf("%-5s %-20s %-20s %-15s%n",
                     "ID", "Studio Name", "Type", "Wing");
