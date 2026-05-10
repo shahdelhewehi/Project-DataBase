@@ -1,5 +1,6 @@
 import java.sql.*;
 import SQL_CLASSES.INSERT;
+import SQL_CLASSES.DELETE_UPDATE ;
 
 public class ProjectMain{
     Connection connection;
@@ -96,6 +97,41 @@ public class ProjectMain{
             System.out.println("🎉 ALL TESTS COMPLETED SUCCESSFULLY!");
             System.out.println("\n💡 Now run the verification SQL queries in SSMS to confirm data.");
         } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+            // ========== TEST CASE 11: Delete Professional ==========
+            System.out.println("🗑️ TEST 11: Deleting Professional (ID=301)...");
+            data.deleteProf(301, app.getConn());
+            System.out.println();
+
+            // ========== TEST CASE 12: Delete Studio ==========
+            System.out.println("🗑️ TEST 12: Deleting Studio (ID=302)...");
+            data.deleteStudio(302, app.getConn());
+            System.out.println();
+
+            // ========== TEST CASE 13: Update Equipment Condition ==========
+            System.out.println("✏️ TEST 13: Updating Equipment Condition...");
+            data.updateEquipmentCondition(304, 305, "Scratched", app.getConn());
+            System.out.println();
+
+            // ========== TEST CASE 14: Update Project ==========
+            System.out.println("✏️ TEST 14: Updating Project Budget & Deadline...");
+            Date newDeadline = Date.valueOf("2025-12-31");
+            data.updateProject(303, 150000.00, newDeadline, app.getConn());
+            System.out.println();
+
+            // ========== TEST CASE 15 ==========
+            System.out.println("🔍 TEST 15: Running Inquiry 3...");
+            data.TopEquipmentProfessional(app.getConn());
+
+            // ========== TEST CASE 16 ==========
+            System.out.println("\n🔍 TEST 16: Running Inquiry 4...");
+            data.StudiosWithNoSessions(app.getConn());
+
+            System.out.println("\n\n🎉 ALL TESTS COMPLETED SUCCESSFULLY!");
+
+        } catch (Exception e) {
+            System.err.println("❌ Error: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
