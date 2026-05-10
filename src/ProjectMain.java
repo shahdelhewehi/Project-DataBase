@@ -16,7 +16,7 @@ public class ProjectMain{
     }
     private Connection getConnection()  throws SQLException{
         try{
-            //!!!
+            //!!! change "DESKTOP-HOAEFGL" to your server name
             String url = "jdbc:sqlserver://DESKTOP-HOAEFGL;databaseName=Studio;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
             //String user = System.getenv("DB_USER");
             //String password = System.getenv("DB_PASSWORD");
@@ -38,102 +38,111 @@ public class ProjectMain{
     }
     public static void main(String[] args) {
         try {
-        ProjectMain app = new ProjectMain();
-        INSERT data = new INSERT();
-            // ========== TEST CASE 1: Insert Professional ==========
+            ProjectMain app = new ProjectMain();
+            INSERT data = new INSERT();
+
+            // TEST CASE 1: Insert Professional
+// Inputs needed: PROFESSIONALID=501, FULLNAME="Sarah Johnson", ROLE="Music Producer"
             System.out.println("📋 TEST 1: Inserting Professional...");
-            data.insertProfessional(301, "Sarah Johnson", "Music Producer", app.getConn());
+            data.insertProfessional(app.getConn());  // Will prompt: 501, Sarah Johnson, Music Producer
             System.out.println("✅ Professional inserted successfully!\n");
 
-            // ========== TEST CASE 2: Insert Studio ==========
+// TEST CASE 2: Insert Studio
+// Inputs needed: STUDIOID=502, STUDIONAME="Studio Omega", STUDIOTYPE="Mixing", WING="South Wing", STUDIO_AVAILABILITY=true
             System.out.println("📋 TEST 2: Inserting Studio...");
-            data.insertStudio(302, "Studio Omega", "Mixing", "South Wing", true, app.getConn());
+            data.insertStudio(app.getConn());  // Will prompt: 502, Studio Omega, Mixing, South Wing, true
             System.out.println("✅ Studio inserted successfully!\n");
 
-            // ========== TEST CASE 3: Insert Project ==========
+// TEST CASE 3: Insert Project
+// Inputs needed: PROJECTID=503, TITLE="Rock Album 2025", PROJECTDATE="2025-03-20", BUDGET=120000.0, DEADLINE="2025-09-15"
             System.out.println("📋 TEST 3: Inserting Project...");
-            Date projectDate = Date.valueOf("2025-03-20");
-            Date deadline = Date.valueOf("2025-09-15");
-            data.insertProject(303, "Rock Album 2025", projectDate, 120000.00, deadline, app.getConn());
+            data.insertProject(app.getConn());  // Will prompt: 503, Rock Album 2025, 2025-03-20, 120000.0, 2025-09-15
             System.out.println("✅ Project inserted successfully!\n");
 
-            // ========== TEST CASE 4: Insert Session ==========
+// TEST CASE 4: Insert Session
+// Inputs needed: SESSIONID=504, PROJECTID=503, STUDIOID=502, SESSIONDATE="2025-04-10", SESSIONSTART="2025-04-10 14:00:00.000", SESSIONEND="2025-04-10 22:00:00.000"
             System.out.println("📋 TEST 4: Inserting Session...");
-            Date sessionDate = Date.valueOf("2025-04-10");
-            Time startTime = Time.valueOf("14:00:00");
-            Time endTime = Time.valueOf("22:00:00");
-            data.insertSessions(304, 303, 302, sessionDate, startTime, endTime, app.getConn());
+            data.insertSessions(app.getConn());  // Will prompt: 504, 503, 502, 2025-04-10, 2025-04-10 14:00:00.000, 2025-04-10 22:00:00.000
             System.out.println("✅ Session inserted successfully!\n");
 
-            // ========== TEST CASE 5: Insert Equipment ==========
+// TEST CASE 5: Insert Equipment
+// Inputs needed: EQUIPMENTID=505, NAME="SSL G-Plus Console", TYPE="Mixing Console", SERIALNUMBER="SN123456789"
             System.out.println("📋 TEST 5: Inserting Equipment...");
-            data.insertEquipment(305, "SSL G-Plus Console", "Mixing Console", 123456789, app.getConn());
+            data.insertEquipment(app.getConn());  // Will prompt: 505, SSL G-Plus Console, Mixing Console, SN123456789
             System.out.println("✅ Equipment inserted successfully!\n");
 
-            // ========== TEST CASE 6: Insert Session_Equipment ==========
+// TEST CASE 6: Insert Session_Equipment
+// Inputs needed: SESSIONID=504, EQUIPMENTID=505, RETURNCONDITION="Like New"
             System.out.println("📋 TEST 6: Inserting Session_Equipment...");
-            data.insertSession_Equipment(304, 305, "Like New", app.getConn());
+            data.insertSession_Equipment(app.getConn());  // Will prompt: 504, 505, Like New
             System.out.println("✅ Session_Equipment inserted successfully!\n");
 
-            // ========== TEST CASE 7: Insert Session_Professional ==========
+// TEST CASE 7: Insert Session_Professional
+// Inputs needed: SESSIONID=504, PROFESSIONALID=501, ROLEINSESSION="Head Producer"
             System.out.println("📋 TEST 7: Inserting Session_Professional...");
-            data.insertSession_Professional(304, 301, "Head Producer", app.getConn());
+            data.insertSession_Professional(app.getConn());  // Will prompt: 504, 501, Head Producer
             System.out.println("✅ Session_Professional inserted successfully!\n");
 
-            // ========== TEST CASE 8: Additional Professional ==========
+// TEST CASE 8: Additional Professional
+// Inputs needed: PROFESSIONALID=506, FULLNAME="Michael Chen", ROLE="Mastering Engineer"
             System.out.println("📋 TEST 8: Inserting Additional Professional...");
-            data.insertProfessional(306, "Michael Chen", "Mastering Engineer", app.getConn());
+            data.insertProfessional(app.getConn());  // Will prompt: 506, Michael Chen, Mastering Engineer
             System.out.println("✅ Additional Professional inserted successfully!\n");
 
-            // ========== TEST CASE 9: Additional Equipment ==========
+// TEST CASE 9: Additional Equipment
+// Inputs needed: EQUIPMENTID=507, NAME="Yamaha NS10 Monitors", TYPE="Studio Monitor", SERIALNUMBER="SN987123456"
             System.out.println("📋 TEST 9: Inserting Additional Equipment...");
-            data.insertEquipment(307, "Yamaha NS10 Monitors", "Studio Monitor", 987123456, app.getConn());
+            data.insertEquipment(app.getConn());  // Will prompt: 507, Yamaha NS10 Monitors, Studio Monitor, SN987123456
             System.out.println("✅ Additional Equipment inserted successfully!\n");
 
-            // ========== TEST CASE 10: Another Session-Professional Link ==========
+// TEST CASE 10: Another Session-Professional Link
+// Inputs needed: SESSIONID=504, PROFESSIONALID=506, ROLEINSESSION="Mastering Consultant"
             System.out.println("📋 TEST 10: Inserting Another Session_Professional...");
-            data.insertSession_Professional(304, 306, "Mastering Consultant", app.getConn());
+            data.insertSession_Professional(app.getConn());  // Will prompt: 504, 506, Mastering Consultant
             System.out.println("✅ Additional Session_Professional inserted successfully!\n");
+
             System.out.println("🎉 ALL TESTS COMPLETED SUCCESSFULLY!");
-            System.out.println("\n💡 Now run the verification SQL queries in SSMS to confirm data.");
-        } catch (Exception e) {
+
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
-            // ========== TEST CASE 11: Delete Professional ==========
-            System.out.println("🗑️ TEST 11: Deleting Professional (ID=301)...");
-            data.deleteProf(301, app.getConn());
-            System.out.println();
-
-            // ========== TEST CASE 12: Delete Studio ==========
-            System.out.println("🗑️ TEST 12: Deleting Studio (ID=302)...");
-            data.deleteStudio(302, app.getConn());
-            System.out.println();
-
-            // ========== TEST CASE 13: Update Equipment Condition ==========
-            System.out.println("✏️ TEST 13: Updating Equipment Condition...");
-            data.updateEquipmentCondition(304, 305, "Scratched", app.getConn());
-            System.out.println();
-
-            // ========== TEST CASE 14: Update Project ==========
-            System.out.println("✏️ TEST 14: Updating Project Budget & Deadline...");
-            Date newDeadline = Date.valueOf("2025-12-31");
-            data.updateProject(303, 150000.00, newDeadline, app.getConn());
-            System.out.println();
-
-            // ========== TEST CASE 15 ==========
-            System.out.println("🔍 TEST 15: Running Inquiry 3...");
-            data.TopEquipmentProfessional(app.getConn());
-
-            // ========== TEST CASE 16 ==========
-            System.out.println("\n🔍 TEST 16: Running Inquiry 4...");
-            data.StudiosWithNoSessions(app.getConn());
-
-            System.out.println("\n\n🎉 ALL TESTS COMPLETED SUCCESSFULLY!");
-
-        } catch (Exception e) {
-            System.err.println("❌ Error: " + e.getMessage());
-            throw new RuntimeException(e);
-        }
+//            // ========== TEST CASE 11: Delete Professional ==========
+//            System.out.println("🗑️ TEST 11: Deleting Professional (ID=301)...");
+//            data.deleteProf(301, app.getConn());
+//            System.out.println();
+//
+//            // ========== TEST CASE 12: Delete Studio ==========
+//            System.out.println("🗑️ TEST 12: Deleting Studio (ID=302)...");
+//            data.deleteStudio(302, app.getConn());
+//            System.out.println();
+//
+//            // ========== TEST CASE 13: Update Equipment Condition ==========
+//            System.out.println("✏️ TEST 13: Updating Equipment Condition...");
+//            data.updateEquipmentCondition(304, 305, "Scratched", app.getConn());
+//            System.out.println();
+//
+//            // ========== TEST CASE 14: Update Project ==========
+//            System.out.println("✏️ TEST 14: Updating Project Budget & Deadline...");
+//            Date newDeadline = Date.valueOf("2025-12-31");
+//            data.updateProject(303, 150000.00, newDeadline, app.getConn());
+//            System.out.println();
+//
+//            // ========== TEST CASE 15 ==========
+//            System.out.println("🔍 TEST 15: Running Inquiry 3...");
+//            data.TopEquipmentProfessional(app.getConn());
+//
+//            // ========== TEST CASE 16 ==========
+//            System.out.println("\n🔍 TEST 16: Running Inquiry 4...");
+//            data.StudiosWithNoSessions(app.getConn());
+//
+//            System.out.println("\n\n🎉 ALL TESTS COMPLETED SUCCESSFULLY!");
+//
+//        }
+//        catch(Exception e) {
+//            System.err.println("Error: " + e.getMessage());
+//            e.printStackTrace();
+//        }
     }
 
 
