@@ -1,6 +1,7 @@
 import java.sql.*;
 import SQL_CLASSES.INSERT;
 import SQL_CLASSES.DELETE_UPDATE ;
+import SQL_CLASSES.SELECT;
 
 public class ProjectMain{
     Connection connection;
@@ -36,9 +37,9 @@ public class ProjectMain{
     public Connection getConn() {
         return connection;
     }
-    public static void main(String[] args) {
+       public static void main(String[] args) {
+        ProjectMain app = new ProjectMain();   // move outside try so we can reuse 'app' later
         try {
-            ProjectMain app = new ProjectMain();
             INSERT data = new INSERT();
 
             // TEST CASE 1: Insert Professional
@@ -105,6 +106,63 @@ public class ProjectMain{
 
         }
         catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        
+        // ========== NEW TESTS 11‑20 (DELETE, UPDATE, SELECT) ==========
+        DELETE_UPDATE deleteUpdateOps = new DELETE_UPDATE();
+        SELECT selectOps = new SELECT();
+
+        try {
+            // TEST CASE 11: Delete Professional
+            System.out.println("🗑️ TEST 11: Deleting Professional (ID=301)...");
+            deleteUpdateOps.deleteProf(301, app.getConn());
+            System.out.println();
+
+            // TEST CASE 12: Delete Studio
+            System.out.println("🗑️ TEST 12: Deleting Studio (ID=302)...");
+            deleteUpdateOps.deleteStudio(302, app.getConn());
+            System.out.println();
+
+            // TEST CASE 13: Update Equipment Condition
+            System.out.println("✏️ TEST 13: Updating Equipment Condition...");
+            deleteUpdateOps.updateEquipmentCondition(304, 305, "Scratched", app.getConn());
+            System.out.println();
+
+            // TEST CASE 14: Update Project
+            System.out.println("✏️ TEST 14: Updating Project Budget & Deadline...");
+            Date newDeadline = Date.valueOf("2025-12-31");
+            deleteUpdateOps.updateProject(303, 150000.00, newDeadline, app.getConn());
+            System.out.println();
+
+            // TEST CASE 15: Inquiry 3
+            System.out.println("🔍 TEST 15: Running Inquiry 3...");
+            deleteUpdateOps.TopEquipmentProfessional(app.getConn());
+
+            // TEST CASE 16: Inquiry 4
+            System.out.println("\n🔍 TEST 16: Running Inquiry 4...");
+            deleteUpdateOps.StudiosWithNoSessions(app.getConn());
+
+            // TEST CASE 17: Select all studios (single table)
+            System.out.println("\n🔍 TEST 17: Select all studios...");
+            selectOps.selectAllStudios(app.getConn());
+
+            // TEST CASE 18: Sessions with project & studio details (JOIN)
+            System.out.println("\n🔍 TEST 18: Sessions with project & studio details...");
+            selectOps.selectSessionsWithDetails(app.getConn());
+
+            // TEST CASE 19: Inquiry 5 – Equipment per project (last month)
+            System.out.println("\n🔍 TEST 19: Inquiry 5 – Equipment per project (last month)...");
+            selectOps.equipmentForProjectsLastMonth(app.getConn());
+
+            // TEST CASE 20: Inquiry 6 – Professionals with project count (last month)
+            System.out.println("\n🔍 TEST 20: Inquiry 6 – Professionals with project count (last month)...");
+            selectOps.professionalProjectCountLastMonth(app.getConn());
+
+            System.out.println("\n🎉 ALL DELETE/UPDATE/SELECT TESTS COMPLETED SUCCESSFULLY!");
+
+        } catch (Exception e) {
+            System.err.println("❌ Error in DELETE/UPDATE/SELECT tests: " + e.getMessage());
             throw new RuntimeException(e);
         }
 //            // ========== TEST CASE 11: Delete Professional ==========
