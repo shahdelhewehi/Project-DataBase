@@ -97,7 +97,7 @@ public class DELETE_UPDATE {
     }
 
     //  Professional who managed the highest VARIETY of different equipment last month
-    public void inquiry3_TopEquipmentProfessional(Connection conn) {
+    public void TopEquipmentProfessional(Connection conn) {
         String sql =
             "SELECT TOP 1 " +
             "    P.PROFESSIONALLD, " +
@@ -135,7 +135,7 @@ public class DELETE_UPDATE {
     }
 
     //  Studios that did NOT host any production sessions last month
-    public void inquiry4_StudiosWithNoSessions(Connection conn) {
+    public void StudiosWithNoSessions(Connection conn) {
         String sql =
             "SELECT S.STUDIOID, S.STUDIONAME, S.STUDIOTYPE, S.WING " +
             "FROM STUDIO S " +
