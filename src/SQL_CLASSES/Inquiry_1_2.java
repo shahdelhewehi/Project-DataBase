@@ -43,13 +43,13 @@ public class Inquiry_1_2 {
             Statement s = conn.createStatement();
             ResultSet result = s.executeQuery(sql);
             System.out.println("Projects: ");
+            if(!result.next()){
+                System.out.println("Not found");
+            }
             while(result.next()){
                 String title  = result.getString("TITLE");
                 int ID = result.getInt("PROJECTID");
                 System.out.println("ID: " + ID + ", Title: " + title );
-            }
-            if(!result.next()){
-                System.out.println("Not found");
             }
 
         } catch (SQLException e) {
