@@ -45,6 +45,7 @@ public class Inquiry_1_2 {
             System.out.println("Projects: ");
             if(!result.next()){
                 System.out.println("Not found");
+                return;
             }
             while(result.next()){
                 String title  = result.getString("TITLE");
