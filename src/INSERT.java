@@ -1,5 +1,3 @@
-package SQL_CLASSES;
-
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.util.Scanner;

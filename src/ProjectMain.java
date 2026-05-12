@@ -1,10 +1,7 @@
 import java.sql.*;
-import SQL_CLASSES.INSERT;
-import SQL_CLASSES.DELETE_UPDATE ;
-import SQL_CLASSES.SELECT;
-import SQL_CLASSES.Inquiry_1_2;
 
-public class ProjectMain{
+public class ProjectMain {
+
     Connection connection;
     //db connection
     ProjectMain(){
@@ -16,30 +13,22 @@ public class ProjectMain{
             throw new RuntimeException(e);
         }
     }
-    private Connection getConnection()  throws SQLException{
-        try{
-            //!!! change "DESKTOP-HOAEFGL" to your server name
-            String url = "jdbc:sqlserver://DESKTOP-HOAEFGL;databaseName=Studio;integratedSecurity=true;encrypt=true;trustServerCertificate=true;";
-            //String user = System.getenv("DB_USER");
-            //String password = System.getenv("DB_PASSWORD");
-        //get values from the system environment
-//        String url = System.getenv("DB_URL");
-//        String user = System.getenv("DB_USER");
-//        String password = System.getenv("DB_PASSWORD");
-//        if (url == null || user == null || password == null) {
-//            throw new SQLException("Database environment variables (DB_URL, DB_USER, DB_PASSWORD) are not set!");
-//        }
+    private Connection getConnection() throws SQLException {
+
+        String url =
+                "jdbc:sqlserver://localhost\\SQLEXPRESS;" +
+                        "databaseName=Studio;" +
+                        "encrypt=true;" +
+                        "trustServerCertificate=true;" +
+                        "integratedSecurity=true;";
+
         return DriverManager.getConnection(url);
-        }
-        catch (SQLException e) {
-            throw e;
-        }
     }
     public Connection getConn() {
         return connection;
     }
-   public static void main(String[] args) {
-    ProjectMain app = new ProjectMain();   // move outside try so we can reuse 'app' later
+    public static void main(String[] args) {
+        ProjectMain app = new ProjectMain();   // move outside try so we can reuse 'app' later
         try {
             Inquiry_1_2 i1 = new Inquiry_1_2();
             Inquiry_1_2 i2 = new Inquiry_1_2();
@@ -48,7 +37,7 @@ public class ProjectMain{
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-            //INSERT data = new INSERT();
+        //INSERT data = new INSERT();
 //            // TEST CASE 1: Insert Professional
 //// Inputs needed: PROFESSIONALID=501, FULLNAME="Sarah Johnson", ROLE="Music Producer"
 //            System.out.println("📋 TEST 1: Inserting Professional...");

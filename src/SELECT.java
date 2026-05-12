@@ -1,5 +1,3 @@
-package SQL_CLASSES;
-
 import java.sql.*;
 
 public class SELECT {
